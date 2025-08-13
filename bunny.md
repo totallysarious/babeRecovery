@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>Password Recovery</title>
+  <script>
+    (function () {
+      // Extract ?userId=...&secret=... from the URL
+      const params = new URLSearchParams(window.location.search);
+      const userId = params.get("userId");
+      const secret = params.get("secret");
+
+      if (!userId || !secret) {
+        document.body.innerHTML = "<p>Invalid recovery link.</p>";
+        return;
+      }
+
+      // Build your deep link
+      const deepLink = `babeWeather://(auth)/forgotpassword?userId=${encodeURIComponent(
+        userId
+      )}&secret=${encodeURIComponent(secret)}`;
+
+      // Try to open the app
+      window.location.href = deepLink;
+
+      // Fallback after a delay (app not installed → show a message or link to store)
+      setTimeout(() => {
+        document.body.innerHTML = `
+          <p>If the app didn’t open, <a href="${deepLink}">tap here</a>.</p>
+        `;
+      }, 1500);
+    })();
+  </script>
+</head>
+<body>
+  <p>Redirecting to app...</p>
+</body>
+</html>
