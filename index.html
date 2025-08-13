@@ -26,7 +26,7 @@
       // Fallback after a delay (app not installed → show a message or link to store)
       setTimeout(() => {
         document.body.innerHTML = `
-          <p>If the app didn’t open, <a href="${deepLink}">tap here</a>.</p>
+          <p>If the app didn’t open, <a href="${deepLink}">tap here</a>. This must be done from the same device the app is installed.</p>
         `;
       }, 1500);
     })();
